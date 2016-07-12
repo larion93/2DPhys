@@ -1,0 +1,11 @@
+c:\users\larion\documents\visual studio 2013\Projects\test\test\bin\Debug\test.exe.config
+c:\users\larion\documents\visual studio 2013\Projects\test\test\bin\Debug\test.exe
+c:\users\larion\documents\visual studio 2013\Projects\test\test\bin\Debug\test.pdb
+c:\users\larion\documents\visual studio 2013\Projects\test\test\obj\Debug\test.Properties.Resources.resources
+c:\users\larion\documents\visual studio 2013\Projects\test\test\obj\Debug\test.csproj.GenerateResource.Cache
+c:\users\larion\documents\visual studio 2013\Projects\test\test\obj\Debug\test.exe
+c:\users\larion\documents\visual studio 2013\Projects\test\test\obj\Debug\test.pdb
+C:\Users\Larion\Documents\Visual Studio 2013\Projects\test\test\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Larion\Documents\Visual Studio 2013\Projects\test\test\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Larion\Documents\Visual Studio 2013\Projects\test\test\obj\Debug\test.Form1.resources
+C:\Users\Larion\Documents\Visual Studio 2013\Projects\test\test\obj\Debug\test.csprojResolveAssemblyReference.cache
