@@ -24,18 +24,24 @@ namespace Phys
         }
 
         float density = 10;
-        int height;
-        int width;
+        static int height;
+        static int width;
         public Form1()
         {
             InitializeComponent();
             height = panel1.Height;
             width = panel1.Width;
             Physics.dt = (float)timer.Interval / 1000;
-            Object.objectsList.Add(new Border(new Vector3(1, 0, 0), 0));
-            Object.objectsList.Add(new Border(new Vector3(0, -1, 0), height));
-            Object.objectsList.Add(new Border(new Vector3(-1, 0, 0), width));
-            Object.objectsList.Add(new Border(new Vector3(0, 1, 0), 0)); 
+            Tuple<Vector2, Vector2> border1 = new Tuple<Vector2, Vector2>(new Vector2(width, 0), new Vector2(0, 0));
+            Tuple<Vector2, Vector2> border2 = new Tuple<Vector2, Vector2>(new Vector2(width, height), new Vector2(width, 0));
+            Tuple<Vector2, Vector2> border3 = new Tuple<Vector2, Vector2>(new Vector2(0, height), new Vector2(width, height));
+            Tuple<Vector2, Vector2> border4 = new Tuple<Vector2, Vector2>(new Vector2(0, 0), new Vector2(0, height));
+            Tuple<Vector2, Vector2> border5 = new Tuple<Vector2, Vector2>(new Vector2(0, 0), new Vector2(width, height));
+            Object.objectsList.Add(new Line(border1));
+            Object.objectsList.Add(new Line(border2)); 
+            Object.objectsList.Add(new Line(border3)); 
+            Object.objectsList.Add(new Line(border4));
+            //Object.objectsList.Add(new Border(border5));
             formParam.Text = height.ToString() + ", " + width.ToString();
         }
         private void timer_Tick(object sender, EventArgs e)
@@ -71,12 +77,9 @@ namespace Phys
             else
             {
                 velocity.X = rnd.Next(-100, 100);
-                //velocity.X = 50;
-                //velocity.Y = 50;
                 velocity.Y = rnd.Next(-100, 100);
             }
             Pen pen = new Pen(Color.Blue, 4);
-            //float radius = rnd.Next(20,50);
             Circle circ = new Circle(e.X, e.Y, density, radius, pen, velocity);
             foreach (Object obj in Object.objectsList)
             {

@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Windows.Forms;
 namespace Phys
 {
-    class Object
+    abstract class Object
     {
         public Vector2 velocity;
         public Vector2 coordinates;
@@ -19,10 +19,6 @@ namespace Phys
         public float inv_mass;
         public static bool showVector;
         public static List<Object> objectsList = new List<Object>();
-        //public static HashSet<Tuple<Object, Object>> uniquePairs = new HashSet<Tuple<Object, Object>>();
-        public virtual void Draw(PaintEventArgs e)
-        {
-
-        }
+        public abstract void Draw(PaintEventArgs e);
     }
 }

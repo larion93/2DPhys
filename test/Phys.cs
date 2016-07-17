@@ -57,12 +57,12 @@ namespace Phys
             float velAlongNormal = Vector2.Dot(rv, normal);
             float j = -(1 + 0.7f) * velAlongNormal;
             float mass_sum = obj1.mass + obj2.mass;
-            j /= 1 / obj1.mass + 1 / obj2.mass;
+            j /= obj1.inv_mass + obj2.inv_mass;
             Vector2 impulse = j * normal;
             obj1.velocity += obj1.inv_mass * impulse;
             obj2.velocity -= obj2.inv_mass * impulse;
         }
-        private static void ResolveCollision(Circle obj1, Border obj2, Vector2 normal)
+        private static void ResolveCollision(Circle obj1, Line obj2, Vector2 normal)
         {
             obj1.velocity *= 0.5f;
             obj1.velocity = Vector2.Reflect(obj1.velocity, normal);
