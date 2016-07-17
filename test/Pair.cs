@@ -28,7 +28,13 @@ namespace Phys
         }
         private Vector2 GetNormalVector(Circle obj1, Line obj2)
         {
-            return obj2.normal;
+            Vector2 point1 = obj2.line.Item1;
+            Vector2 point2 = obj2.line.Item2;
+            Vector2 circleCenter = obj1.coordinates;
+            float value = (point2.X - point1.X) * (circleCenter.Y - point1.Y) - (circleCenter.X - point1.X) * (point2.Y - point1.Y);
+            if (value < 0) { return obj2.normalLeft; }
+            else if (value > 0) { return obj2.normalRight; }
+            return obj2.normalLeft;
         }
         public float GetDistance(Circle obj1, Line obj2)
         {

@@ -41,7 +41,7 @@ namespace Phys
             Object.objectsList.Add(new Line(border2)); 
             Object.objectsList.Add(new Line(border3)); 
             Object.objectsList.Add(new Line(border4));
-            //Object.objectsList.Add(new Border(border5));
+            Object.objectsList.Add(new Line(border5));
             formParam.Text = height.ToString() + ", " + width.ToString();
         }
         private void timer_Tick(object sender, EventArgs e)

@@ -13,12 +13,14 @@ namespace Phys
     {
         public Tuple<Vector2, Vector2> line;
         public Tuple<Point, Point> linePoint;
-        public Vector2 normal;
+        public Vector2 normalLeft;
+        public Vector2 normalRight;
         public Line(Tuple<Vector2, Vector2> border)
         {
             inv_mass = 0;
             line = border;
-            normal = Vector2.Normalize(new Vector2 ((line.Item2.Y - line.Item1.Y),-(line.Item2.X - line.Item1.X)));
+            normalLeft = Vector2.Normalize(new Vector2 ((line.Item2.Y - line.Item1.Y),-(line.Item2.X - line.Item1.X)));
+            normalRight = Vector2.Normalize(new Vector2(-(line.Item2.Y - line.Item1.Y), (line.Item2.X - line.Item1.X)));
             Point point1 = new Point((int)line.Item1.X, (int)line.Item1.Y);
             Point point2 = new Point((int)line.Item2.X, (int)line.Item2.Y);
             linePoint = new Tuple<Point, Point>(point1, point2);
