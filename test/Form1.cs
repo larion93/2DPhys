@@ -36,12 +36,12 @@ namespace Phys
             Tuple<Vector2, Vector2> border2 = new Tuple<Vector2, Vector2>(new Vector2(width, height), new Vector2(width, 0));
             Tuple<Vector2, Vector2> border3 = new Tuple<Vector2, Vector2>(new Vector2(0, height), new Vector2(width, height));
             Tuple<Vector2, Vector2> border4 = new Tuple<Vector2, Vector2>(new Vector2(0, 0), new Vector2(0, height));
-            Tuple<Vector2, Vector2> border5 = new Tuple<Vector2, Vector2>(new Vector2(0, 0), new Vector2(width, height));
-            Object.objectsList.Add(new Line(border1));
-            Object.objectsList.Add(new Line(border2)); 
-            Object.objectsList.Add(new Line(border3)); 
-            Object.objectsList.Add(new Line(border4));
-            Object.objectsList.Add(new Line(border5));
+            Tuple<Vector2, Vector2> border5 = new Tuple<Vector2, Vector2>(new Vector2(0, 0), new Vector2(width/2, height/2));
+            //Object.objectsList.Add(new Line(border1));
+            //Object.objectsList.Add(new Line(border2)); 
+            //Object.objectsList.Add(new Line(border3)); 
+            //Object.objectsList.Add(new Line(border4));
+            Object.objectsList.Add(new LineSegment(border5));
             formParam.Text = height.ToString() + ", " + width.ToString();
         }
         private void timer_Tick(object sender, EventArgs e)

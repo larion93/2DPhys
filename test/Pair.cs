@@ -46,6 +46,22 @@ namespace Phys
             float distance = Vector2.Distance(obj1.coordinates, projection) - obj1.radius;
             return distance;
         }
+        public float GetDistance(Circle obj1, LineSegment obj2)
+        {
+            Vector2 point1 = obj2.line.Item1;
+            Vector2 point2 = obj2.line.Item2;
+            Vector2 ab = point2 - point1;
+            Vector2 ap = obj1.coordinates - point1;
+            float lineLength = ab.Length();
+            Vector2 scaledVector = ap * (1/ lineLength);
+            Vector2 lineUnitVector = Vector2.Normalize(ab);
+            var t = Vector2.Dot(lineUnitVector, scaledVector);
+            if (t < 0) { t = 0; }
+            if (t > 1) { t = 1; }
+            var nearest = ab * t;
+            float distance = Vector2.Distance(nearest, obj1.coordinates) - obj1.radius;
+            return distance;
+        }
         public float GetDistance(Circle obj1, Circle obj2)
         {
             return Vector2.Distance(obj1.coordinates, obj2.coordinates) - obj1.radius - obj2.radius;
