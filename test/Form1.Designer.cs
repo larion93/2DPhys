@@ -34,7 +34,7 @@
             this.showVector_btn = new System.Windows.Forms.Button();
             this.formParam = new System.Windows.Forms.Label();
             this.switchGravity_btn = new System.Windows.Forms.Button();
-            this.panel1 = new DoubleBufferedPanel();
+            this.panel1 = new Phys.Form1.DoubleBufferedPanel();
             this.SuspendLayout();
             // 
             // timer
@@ -88,7 +88,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1115, 454);
             this.panel1.TabIndex = 4;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick);
             // 
             // Form1

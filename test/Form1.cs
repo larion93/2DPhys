@@ -21,11 +21,18 @@ namespace Phys
                     ControlStyles.OptimizedDoubleBuffer |
                     ControlStyles.UserPaint, true);
             }
+            protected override void OnPaint(PaintEventArgs e)
+            {
+                base.OnPaint(e);
+                Graphics g = e.Graphics;
+                Render.g = g;
+                Render.RenderAll();
+            }
         }
 
         float density = 10;
-        static int height;
-        static int width;
+        public static int height;
+        public static int width;
         public Form1()
         {
             InitializeComponent();
@@ -37,12 +44,14 @@ namespace Phys
             Tuple<Vector2, Vector2> border3 = new Tuple<Vector2, Vector2>(new Vector2(0, height), new Vector2(width, height));
             Tuple<Vector2, Vector2> border4 = new Tuple<Vector2, Vector2>(new Vector2(0, 0), new Vector2(0, height));
             Tuple<Vector2, Vector2> border5 = new Tuple<Vector2, Vector2>(new Vector2(0, 0), new Vector2(width/2, height/2));
+
             //Object.objectsList.Add(new Line(border1));
             //Object.objectsList.Add(new Line(border2)); 
             //Object.objectsList.Add(new Line(border3)); 
             //Object.objectsList.Add(new Line(border4));
             Object.objectsList.Add(new LineSegment(border5));
             formParam.Text = height.ToString() + ", " + width.ToString();
+            Render.buffer = new Bitmap(width, height);
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -62,7 +71,7 @@ namespace Phys
         }
         private void showVector_btn_Click(object sender, EventArgs e)
         {
-            Object.showVector = !Object.showVector;
+            Object.ShowVector = !Object.ShowVector;
         }
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -87,10 +96,6 @@ namespace Phys
                 Pair.uniquePairs.Add(pair);
             }
             Object.objectsList.Add(circ);
-        }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Render.RenderAll(e);
         }
     }
 }

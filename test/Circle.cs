@@ -12,32 +12,31 @@ namespace Phys
 {
     class Circle:Object
     {
-        public float radius;
+        public float Radius { get; set; }
         public Circle(float x, float y, float d, float r, Pen p, Vector2 velocity)
         {
-            this.velocity.X = velocity.X;
-            this.velocity.Y = velocity.Y;
-            area = (float)Math.PI * r * r;
-            mass = d*area;
-            density = d;
-            inv_mass = 1 / mass;
-            coordinates.X = x;
-            coordinates.Y = y;
-            radius = r;
-            pen = p;
+            Velocity = velocity;
+            ElasticityCoef = 0.7f;
+            Area = (float)Math.PI * r * r;
+            Mass = d*Area;
+            Density = d;
+            Inv_mass = 1 / Mass;
+            Coordinates = new Vector2(x,y);
+            Radius = r;
+            Pen = p;
         }
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(Graphics g)
         {
             Brush aBrush = Brushes.Black;
             Brush bBrush = Brushes.Red;
-            e.Graphics.DrawEllipse(pen, coordinates.X - radius, coordinates.Y - radius, radius * 2, radius * 2);
-            e.Graphics.FillRectangle(aBrush, coordinates.X, coordinates.Y, 2, 2);
-            if (showVector)
+            g.DrawEllipse(Pen, Coordinates.X - Radius, Coordinates.Y - Radius, Radius * 2, Radius * 2);
+            g.FillRectangle(aBrush, Coordinates.X, Coordinates.Y, 2, 2);
+            if (ShowVector)
             {
                 Pen vectorPen = new Pen(Color.Green, 4);
-                Point center = new Point((int)coordinates.X, (int)coordinates.Y);
-                Point vectorDirection = new Point((int)(coordinates.X + velocity.X), (int)(coordinates.Y + velocity.Y));
-                e.Graphics.DrawLine(vectorPen, center, vectorDirection);
+                Point center = new Point((int)Coordinates.X, (int)Coordinates.Y);
+                Point vectorDirection = new Point((int)(Coordinates.X + Velocity.X), (int)(Coordinates.Y + Velocity.Y));
+                g.DrawLine(vectorPen, center, vectorDirection);
             }
         }
     }

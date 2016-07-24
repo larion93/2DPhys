@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Windows.Forms;
 
 namespace Phys
 {
@@ -19,8 +20,8 @@ namespace Phys
             }
             foreach (Object obj in Object.objectsList)
             {
-                if (gravityOn) obj.velocity += gravity * dt;
-                obj.coordinates += obj.velocity * dt;
+                if (gravityOn) obj.Velocity += gravity * dt;
+                obj.Coordinates += obj.Velocity * dt;
             }
         }
         static void PositionalCorrection(Object obj1, Object obj2, Vector2 normal, float penetration)
@@ -31,10 +32,10 @@ namespace Phys
             {
                 penetration = Math.Abs(penetration);
                 float max = Math.Max(penetration - slop, 0.0f);
-                float massTotal = obj1.inv_mass + obj2.inv_mass;
+                float massTotal = obj1.Inv_mass + obj2.Inv_mass;
                 Vector2 correction = (max / massTotal) * percent * normal;
-                obj1.coordinates += obj1.inv_mass * correction;
-                obj2.coordinates -= obj2.inv_mass * correction;
+                obj1.Coordinates += obj1.Inv_mass * correction;
+                obj2.Coordinates -= obj2.Inv_mass * correction;
             }
         }
         private static void CheckAndResolveCollision(Pair pair)
@@ -43,7 +44,7 @@ namespace Phys
             dynamic obj2 = pair.pair.Item2;
             Vector2 normal = pair.Normal;
             float distance = pair.Distance;
-            float relVelocity = Vector2.Dot(obj1.velocity, normal);
+            float relVelocity = Vector2.Dot(obj1.Velocity, normal);
             float remove = relVelocity + distance / dt;
             if (remove < 0)
             {
@@ -53,19 +54,37 @@ namespace Phys
         }
         private static void ResolveCollision(Circle obj1, Circle obj2, Vector2 normal)
         {
-            Vector2 rv = obj1.velocity - obj2.velocity;
+            Vector2 rv = obj1.Velocity - obj2.Velocity;
+            float elasticityCoef = Math.Min(obj1.ElasticityCoef, obj2.ElasticityCoef);
             float velAlongNormal = Vector2.Dot(rv, normal);
-            float j = -(1 + 0.7f) * velAlongNormal;
-            float mass_sum = obj1.mass + obj2.mass;
-            j /= obj1.inv_mass + obj2.inv_mass;
+            float j = -(1 + elasticityCoef) * velAlongNormal;
+            float mass_sum = obj1.Mass + obj2.Mass;
+            j /= obj1.Inv_mass + obj2.Inv_mass;
             Vector2 impulse = j * normal;
-            obj1.velocity += obj1.inv_mass * impulse;
-            obj2.velocity -= obj2.inv_mass * impulse;
+            obj1.Velocity += obj1.Inv_mass * impulse;
+            obj2.Velocity -= obj2.Inv_mass * impulse;
         }
         private static void ResolveCollision(Circle obj1, Line obj2, Vector2 normal)
         {
-            obj1.velocity *= 0.5f;
-            obj1.velocity = Vector2.Reflect(obj1.velocity, normal);
+            //obj1.velocity *= 0.5f;
+            Vector2 projection = obj1.Velocity.Length() * normal;
+            Render.DrawVector(projection);
+            Vector2 slide = obj1.Velocity + projection;
+            float relVelocity = Vector2.Dot(obj1.Velocity, normal);
+            //Vector2 relVelocityVector = obj1.velocity - projection;
+            //float relVelocity = relVelocityVector.Length();
+            //obj1.velocity += slide;
+            //if (Math.Abs(relVelocity) < 1)
+            //{
+                obj1.Velocity += slide;
+            //Render.DrawVector(slide);
+            //}
+            //else
+            //{
+                obj1.Velocity *= Math.Min(obj1.ElasticityCoef, obj2.ElasticityCoef);
+                obj1.Velocity = Vector2.Reflect(obj1.Velocity, normal);
+            //}
+            //obj1.velocity = Vector2.Reflect(obj1.velocity, normal);
         }
     }
 }

@@ -11,24 +11,26 @@ namespace Phys
 {
     class Line:Object
     {
-        public Tuple<Vector2, Vector2> line;
-        public Tuple<Point, Point> linePoint;
-        public Vector2 normalLeft;
-        public Vector2 normalRight;
+        public Tuple<Vector2, Vector2> LineVectors { get; set; }
+        public Tuple<Point, Point> LinePoint { get; set; }
+        public Vector2 NormalLeft { get; set; }
+        public Vector2 NormalRight { get; set; }
+
         public Line(Tuple<Vector2, Vector2> border)
         {
-            inv_mass = 0;
-            line = border;
-            normalLeft = Vector2.Normalize(new Vector2 ((line.Item2.Y - line.Item1.Y),-(line.Item2.X - line.Item1.X)));
-            normalRight = Vector2.Normalize(new Vector2(-(line.Item2.Y - line.Item1.Y), (line.Item2.X - line.Item1.X)));
-            Point point1 = new Point((int)line.Item1.X, (int)line.Item1.Y);
-            Point point2 = new Point((int)line.Item2.X, (int)line.Item2.Y);
-            linePoint = new Tuple<Point, Point>(point1, point2);
+            Inv_mass = 0;
+            ElasticityCoef = 0.5f;
+            LineVectors = border;
+            NormalLeft = Vector2.Normalize(new Vector2 ((LineVectors.Item2.Y - LineVectors.Item1.Y),-(LineVectors.Item2.X - LineVectors.Item1.X)));
+            NormalRight = Vector2.Normalize(new Vector2(-(LineVectors.Item2.Y - LineVectors.Item1.Y), (LineVectors.Item2.X - LineVectors.Item1.X)));
+            Point point1 = new Point((int)LineVectors.Item1.X, (int)LineVectors.Item1.Y);
+            Point point2 = new Point((int)LineVectors.Item2.X, (int)LineVectors.Item2.Y);
+            LinePoint = new Tuple<Point, Point>(point1, point2);
         }
-        public override void Draw(PaintEventArgs e)
+        public override void Draw(Graphics g)
         {
             Pen pen = new Pen(Color.Red, 4);
-            e.Graphics.DrawLine(pen, linePoint.Item1, linePoint.Item2);
+            g.DrawLine(pen, LinePoint.Item1, LinePoint.Item2);
         }
     }
 }
