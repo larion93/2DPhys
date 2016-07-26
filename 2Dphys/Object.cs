@@ -19,7 +19,6 @@ namespace Phys
         public float ElasticityCoef { get; set; }
         public static bool ShowVector { get; set; }
         public Vector2 Velocity { get; set; }
-
         public Vector2 Coordinates { get; set; }
         public abstract void Draw(Graphics g);
     }

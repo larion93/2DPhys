@@ -57,6 +57,7 @@ namespace Phys
             if (t < 0) { t = 0; }
             if (t > 1) { t = 1; }
             var nearest = point1 + t * ab;
+            Render.DrawVector(nearest);
             float distance = Vector2.Distance(nearest, obj1.Coordinates) - obj1.Radius;
             return distance;
         }

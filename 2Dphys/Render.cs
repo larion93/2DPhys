@@ -19,8 +19,8 @@ namespace Phys
         static public void RenderAll()
         {
             g.DrawImage(buffer,0,0);
-            //buffer.Dispose();
-            //buffer = new Bitmap(Form1.width, Form1.height); // Clear buffer after drawing
+            buffer.Dispose();
+            buffer = new Bitmap(Form1.width, Form1.height); // Clear buffer after drawing
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             foreach (Object obj in Object.objectsList)
             {
